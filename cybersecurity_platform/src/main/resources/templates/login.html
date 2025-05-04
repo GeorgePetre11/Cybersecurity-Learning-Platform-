@@ -1,0 +1,57 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+    <title>Login - CyberEdu</title>
+    <style>
+        .form-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #1a1a1a;
+            border: 1px solid #fff;
+            border-radius: 10px;
+            color: #fff;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            background-color: #f70000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #ff3a3a;
+        }
+    </style>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="form-container">
+        <h2>Login</h2>
+        <form th:action="@{/login}" method="post">
+            <label>Username</label>
+            <input type="text" name="username" required />
+            <label>Password</label>
+            <input type="password" name="password" required />
+            <div th:if="${error}" th:text="${error}" style="color:red;"></div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
