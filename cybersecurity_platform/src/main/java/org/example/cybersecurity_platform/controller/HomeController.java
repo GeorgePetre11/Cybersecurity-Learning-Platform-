@@ -26,11 +26,6 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/register")
-    public String registerForm() {
-        return "register";
-    }
-
     @GetMapping("/login")
     public String loginForm() {
         return "login";
