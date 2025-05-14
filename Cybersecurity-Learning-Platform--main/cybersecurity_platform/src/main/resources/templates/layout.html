@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>CyberEdu</title>
+    <link rel="stylesheet" th:href="@{/css/news.css}">
+</head>
+<body class="cyberedu">
+
+<header th:replace="fragments/header :: header"></header>
+
+<main layout:fragment="content">
+    <p>Fallback content if no fragment provided</p>
+</main>
+
+<footer class="text-center text-white mt-5 p-3 border-top border-secondary">
+    <p>&copy; 2025 CyberEdu. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
