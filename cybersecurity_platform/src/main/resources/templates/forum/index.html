@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+    <title>Forum</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <section class="container mt-4">
+        <h2>CyberEdu Forum</h2>
+        <a class="btn btn-primary mb-3" href="/forum/new">+ New Post</a>
+
+        <div th:if="${#lists.isEmpty(posts)}">
+            <p>No posts yet. Be the first to start a discussion!</p>
+        </div>
+
+        <ul class="list-group" th:if="${!#lists.isEmpty(posts)}">
+            <li class="list-group-item" th:each="post : ${posts}">
+                <h5>
+                    <a th:href="@{|/forum/post/${post.id}|}" th:text="${post.title}"></a>
+                </h5>
+                <small>
+                    By <span th:text="${post.author.username}"></span>
+                    at <span th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                </small>
+            </li>
+        </ul>
+    </section>
+</div>
+</body>
+</html>
