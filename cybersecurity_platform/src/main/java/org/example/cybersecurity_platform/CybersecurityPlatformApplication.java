@@ -1,13 +1,17 @@
 package org.example.cybersecurity_platform;
 
+import org.example.cybersecurity_platform.model.Course;
 import org.example.cybersecurity_platform.model.Role;
 import org.example.cybersecurity_platform.model.User;
+import org.example.cybersecurity_platform.repository.CourseRepository;
 import org.example.cybersecurity_platform.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 
 import java.util.Set;
 
@@ -33,4 +37,23 @@ public class CybersecurityPlatformApplication {
             }
         };
     }
+
+
+    @Bean
+    public CommandLineRunner seedCourses(CourseRepository repo) {
+        return args -> {
+            if (repo.count() == 0) {
+                repo.save(new Course("Intro to Cybersecurity",
+                        "A first look at threats, defenses & best practices.",
+                        49.99, 20));
+                repo.save(new Course("Web App Pentesting",
+                        "Hands-on hacking of web applications.",
+                        99.00, 10));
+                repo.save(new Course("Secure Coding in Java",
+                        "Avoid the OWASP Top 10 via secure patterns.",
+                        79.50, 15));
+            }
+        };
+    }
+
 }

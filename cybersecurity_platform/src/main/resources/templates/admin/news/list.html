@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage News</title>
+</head>
+<body>
+<div layout:fragment="content" class="container py-4">
+    <h2>All News</h2>
+    <a th:href="@{/admin/news/create}" class="btn btn-primary mb-3">Create New News</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Published At</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="n : ${newsList}">
+            <td th:text="${n.id}"></td>
+            <td th:text="${n.title}"></td>
+            <td th:text="${#dates.format(n.publishedAt, 'yyyy-MM-dd HH:mm')}"/>
+            <td>
+                <a th:href="@{/admin/news/{id}/edit(id=${n.id})}" class="btn btn-sm btn-secondary">Edit</a>
+                <form th:action="@{/admin/news/{id}/delete(id=${n.id})}" method="post" style="display:inline">
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
