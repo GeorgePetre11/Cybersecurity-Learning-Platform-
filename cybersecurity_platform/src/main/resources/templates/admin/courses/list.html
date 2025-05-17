@@ -10,8 +10,16 @@
 <div layout:fragment="content" class="container py-4">
     <h1>Courses</h1>
 
-    <!-- Link to create a new course -->
-    <a th:href="@{/admin/courses/create}" class="btn btn-success mb-3">+ Create New Course</a>
+    <div class="mb-3">
+        <!-- Link to create a new course -->
+        <a th:href="@{/admin/courses/create}" class="btn btn-success">
+            + Create New Course
+        </a>
+        <!-- New button to navigate to Manage Users -->
+        <a th:href="@{/admin/users}" class="btn btn-primary ms-2">
+            Manage Users
+        </a>
+    </div>
 
     <!-- Courses table -->
     <table class="table table-striped">
@@ -31,9 +39,13 @@
             <td th:text="${c.price}"></td>
             <td th:text="${c.quantity}"></td>
             <td>
-                <a th:href="@{/admin/courses/{id}/edit(id=${c.id})}" class="btn btn-sm btn-primary">Edit</a>
-                <form th:action="@{/admin/courses/{id}/delete(id=${c.id})}" method="post" style="display:inline">
-                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                <a th:href="@{/admin/courses/{id}/edit(id=${c.id})}"
+                   class="btn btn-sm btn-primary">Edit</a>
+                <form th:action="@{/admin/courses/{id}/delete(id=${c.id})}"
+                      method="post" style="display:inline">
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Delete
+                    </button>
                 </form>
             </td>
         </tr>

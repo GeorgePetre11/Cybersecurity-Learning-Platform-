@@ -11,6 +11,13 @@
 <body>
 <div layout:fragment="content" class="container py-4">
   <h2>Manage Users</h2>
+
+  <!-- New button to navigate to courses list -->
+  <a th:href="@{/admin/courses}"
+     class="btn btn-primary mb-3">
+    Manage Courses
+  </a>
+
   <table class="table table-dark table-striped">
     <thead>
     <tr>
