@@ -1,10 +1,12 @@
 package org.example.cybersecurity_platform;
 
+import org.example.cybersecurity_platform.model.Challenge;
 import org.example.cybersecurity_platform.model.Course;
 import org.example.cybersecurity_platform.model.Role;
 import org.example.cybersecurity_platform.model.User;
 import org.example.cybersecurity_platform.repository.CourseRepository;
 import org.example.cybersecurity_platform.repository.UserRepository;
+import org.example.cybersecurity_platform.repository.ChallengeRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -55,5 +57,17 @@ public class CybersecurityPlatformApplication {
             }
         };
     }
+
+    // in CybersecurityPlatformApplication.java
+
+    @Bean
+    CommandLineRunner seedChallenges(ChallengeRepository repo) {
+        return args -> {
+            if (repo.count() == 0) {
+                repo.save(new Challenge(null, "Networking Beginner Challenge"));
+            }
+        };
+    }
+
 
 }

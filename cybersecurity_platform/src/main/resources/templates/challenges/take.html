@@ -1,0 +1,74 @@
+<!-- src/main/resources/templates/challenges/take.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${challenge.title}">Challenge</title>
+</head>
+<body>
+<div layout:fragment="content" class="container py-4">
+  <h1 th:text="${challenge.title}">Networking Beginner Challenge</h1>
+
+  <!-- Timer display -->
+  <div class="mb-4">
+    Time left: <span id="timer">--:--</span>
+  </div>
+
+  <!-- Questions form -->
+  <form id="challengeForm"
+        th:action="@{/challenges/{id}/finish(id=${challenge.id})}"
+        method="post">
+    <div th:each="q, stat : ${questions}" class="mb-3">
+      <p>
+        <strong th:text="${stat.index + 1} + '. ' + ${q.text}">
+          Question text
+        </strong>
+      </p>
+      <div th:each="opt : ${q.options}">
+        <label>
+          <input type="radio"
+                 th:name="${'answers[' + stat.index + ']'}"
+                 th:value="${opt}" />
+          <span th:text="${opt}">Option</span>
+        </label><br/>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Finish</button>
+  </form>
+
+  <!-- Timer script (inside the same fragment!) -->
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+      console.log('🌐 Challenge script loaded, timeLimit=', [[${timeLimit}]]);
+      let totalSeconds = /*[[${timeLimit} * 60]]*/600;
+      const timerEl = document.getElementById('timer'),
+            form    = document.getElementById('challengeForm');
+
+      function formatTime(sec) {
+        const m = Math.floor(sec/60), s = sec % 60;
+        return (m < 10 ? '0'+m : m) + ':' + (s < 10 ? '0'+s : s);
+      }
+
+      // initial display
+      timerEl.textContent = formatTime(totalSeconds);
+
+      // tick every second
+      const tick = setInterval(() => {
+        totalSeconds--;
+        console.log('⏱ tick, totalSeconds=', totalSeconds);
+        if (totalSeconds <= 0) {
+          clearInterval(tick);
+          console.log('🔔 Time up – submitting form');
+          form.submit();
+        } else {
+          timerEl.textContent = formatTime(totalSeconds);
+        }
+      }, 1000);
+    /*]]>*/
+  </script>
+</div>
+</body>
+</html>
