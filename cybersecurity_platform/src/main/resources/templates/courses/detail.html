@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${course.title}">Course Detail</title>
+</head>
+<body>
+<div layout:fragment="content" class="container py-4">
+  <h2 th:text="${course.title}">Course Title</h2>
+  <p><strong>Price:</strong> <span th:text="${course.price} + ' USD'">49.99</span></p>
+  <p><strong>Available Seats:</strong> <span th:text="${course.quantity}">20</span></p>
+  <hr>
+  <div th:text="${course.description}">Full course description…</div>
+  <a th:href="@{/courses}" class="btn btn-link mt-3">← Back to Courses</a>
+</div>
+</body>
+</html>

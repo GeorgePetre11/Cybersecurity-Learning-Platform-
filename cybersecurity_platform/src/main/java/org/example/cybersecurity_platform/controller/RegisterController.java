@@ -1,7 +1,8 @@
+// src/main/java/org/example/cybersecurity_platform/controller/RegisterController.java
 package org.example.cybersecurity_platform.controller;
 
-import org.example.cybersecurity_platform.model.Role;
 import org.example.cybersecurity_platform.model.User;
+import org.example.cybersecurity_platform.model.Role;
 import org.example.cybersecurity_platform.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,52 +10,58 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 public class RegisterController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository users;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public RegisterController(UserRepository users,
+                              PasswordEncoder passwordEncoder) {
+        this.users = users;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @GetMapping("/register")
-    public String showRegisterForm() {
+    public String showForm() {
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerUser(
+    public String register(
             @RequestParam String username,
             @RequestParam String password,
-            @RequestParam(required = false) List<Role> roles,
+            @RequestParam(name = "roles", required = false) List<String> rolesParam,
             Model model
     ) {
-        if (userRepository.findByUsername(username).isPresent()) {
-            model.addAttribute("error", "Username already exists.");
+        // 1) Check if username already exists
+        if (users.findByUsername(username).isPresent()) {
+            model.addAttribute("error", "Username already taken");
             return "register";
         }
 
-        // Determine roles: default to LEARNER if none selected
-        Set<Role> assigned = new HashSet<>();
-        if (roles == null || roles.isEmpty()) {
-            assigned.add(Role.ROLE_LEARNER);
+        // 2) Map submitted strings to Role enum (or default to LEARNER)
+        Set<Role> roles;
+        if (rolesParam == null || rolesParam.isEmpty()) {
+            roles = Set.of(Role.ROLE_LEARNER);
         } else {
-            assigned.addAll(roles);
+            roles = rolesParam.stream()
+                    .map(Role::valueOf)
+                    .collect(Collectors.toSet());
         }
 
-        // Encrypt and save
-        String encryptedPassword = passwordEncoder.encode(password);
-        User newUser = new User();
-        newUser.setUsername(username);
-        newUser.setPassword(encryptedPassword);
-        newUser.setRoles(assigned);
+        // 3) Create & save new user
+        User u = new User();
+        u.setUsername(username);
+        u.setPassword(passwordEncoder.encode(password));
+        u.setRoles(roles);
 
-        userRepository.save(newUser);
-        return "redirect:/login";
+        users.save(u);
+        return "redirect:/login?registered";
     }
 }

@@ -49,7 +49,7 @@
             <label>Password</label>
             <input type="password" name="password" required />
             <label>Roles:</label>
-            <input type="checkbox" name="roles" value="ROLE_LEARNER" checked/> Learner
+            <input type="checkbox" name="roles" value="ROLE_LEARNER"/> Learner
             <input type="checkbox" name="roles" value="ROLE_BLOGGER"/> Blogger
             <input type="checkbox" name="roles" value="ROLE_CHALLENGER"/> Challenger
             <div th:if="${error}" th:text="${error}" style="color:red;"></div>
