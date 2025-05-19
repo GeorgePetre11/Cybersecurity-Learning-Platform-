@@ -36,11 +36,36 @@
       display: inline;
       margin-right: 8px;
     }
+    .orders-card {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #1a1a1a;
+      border: 1px solid #fff;
+      border-radius: 10px;
+      color: #fff;
+    }
+    .orders-card h3 {
+      margin-top: 0;
+    }
+    .orders-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .orders-table th,
+    .orders-table td {
+      padding: 8px 12px;
+      border: 1px solid #444;
+    }
+    .orders-table th {
+      background-color: #222;
+    }
   </style>
 </head>
 
 <body>
 <div layout:fragment="content">
+  <!-- PROFILE SECTION -->
   <div class="profile-card">
     <h2>Your Profile</h2>
 
@@ -52,13 +77,12 @@
     <div class="profile-row">
       <span class="profile-label">Roles:</span>
       <ul class="role-list">
-        <li th:each="r : ${user.roles}" th:text="${r.name().replace('ROLE_','')}">ROLE</li>
+        <li th:each="r : ${user.roles}"
+            th:text="${r.name().replace('ROLE_','')}">ROLE</li>
       </ul>
     </div>
-
-    <!-- Add more fields as needed -->
-    <!-- e.g. if you later add email, bio, etc. -->
   </div>
+
 </div>
 </body>
 </html>

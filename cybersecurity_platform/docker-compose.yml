@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  db:
+    image: mariadb:11
+    restart: always
+    environment:
+      # match these to your Spring properties
+      MYSQL_DATABASE: cybersecurity_platform
+      MYSQL_USER:   root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  app:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "9090:9090"
+    environment:
+      # override Spring datasource via env vars
+      SPRING_DATASOURCE_URL:      jdbc:mariadb://db:3306/cybersecurity_platform
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      # you can also set profiles, etc
+      SPRING_PROFILES_ACTIVE:     prod
+
+volumes:
+  db_data:
