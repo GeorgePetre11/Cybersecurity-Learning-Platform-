@@ -38,8 +38,8 @@
                 <li sec:authorize="isAuthenticated()">
                     <a th:href="@{/cart}">
                         Cart
-                        <span th:if="${!cartService.isEmpty()}">
-                (<span th:text="${cartService.totalItems()}">0</span>)
+                        <span th:if="${!cartService.isEmpty}">
+                (<span th:text="${cartService.totalItems}">0</span>)
               </span>
                     </a>
                 </li>
