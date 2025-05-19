@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+    <title>CyberEdu News</title>
+    <link rel="stylesheet" th:href="@{/css/news.css}" />
+</head>
+
+<body>
+<div layout:fragment="content">
+    <!-- Banner and Highlights -->
+    <section class="banner">
+        <div class="banner-main-content">
+            <h2>WORLD'S LATEST CYBERSECURITY NEWS</h2>
+            <h3>World's Leading Security News Portal</h3>
+
+            <div class="current-news-head">
+                <a href="https://www.theregister.com/2023/05/09/fbi_operation_medusa_snake/">
+                    <h3>FBI Medusa Attacks Russia <span>by a US Journalist</span></h3>
+                </a>
+                <a href="https://hbr.org/2023/04/the-new-risks-chatgpt-poses-to-cybersecurity">
+                    <h3>AI risks to CyberSecurity <span>by JIM CHILTON</span></h3>
+                </a>
+            </div>
+        </div>
+
+        <div class="banner-sub-content">
+            <div class="hot-topic">
+                <div class="hot-topic-content">
+                    <h2>Hackers Seize Control</h2>
+                    <h3>Ransomware</h3>
+                    <p>Hackers seize control of someone’s data and demand a ransom to restore access</p>
+                    <a href="https://www.europarl.europa.eu/news/en/headlines/society/20220120STO21428/cybersecurity-main-and-emerging-threats"><button class="btn btn-danger">Read More</button></a>
+                </div>
+            </div>
+            <div class="hot-topic">
+                <div class="hot-topic-content">
+                    <h2>Google Cloud</h2>
+                    <h3>SQL</h3>
+                    <p>A new security flaw has been disclosed in the Google Cloud Platform's Cloud SQL service...</p>
+                    <a href="https://thehackernews.com/2023/05/severe-flaw-in-google-clouds-cloud-sql.html?m=1"><button class="btn btn-danger">Read More</button></a>
+                </div>
+            </div>
+            <div class="hot-topic">
+                <div class="hot-topic-content">
+                    <h2>China Attacks USA</h2>
+                    <h3>International level Attack</h3>
+                    <p>Chinese Hackers Attack US Critical Infrastructure Using Network Administration Tools.</p>
+                    <a href="https://cybersecuritynews.com/chinese-hackers-attack-us-critical-infrastructure/?amp"><button class="btn btn-danger">Read More</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- Main News Articles -->
+    <main>
+        <section class="main-container-right">
+            <h2>Latest Stories</h2>
+
+            <article>
+                <h4>just in </h4>
+                <div>
+                    <h2>Tesla Data Leak Exposes Thousands Of Safety Complaints</h2>
+                    <p>...complaints about self-acceleration issues and 1,500 complaints about brake problems...</p>
+                    <a href="https://cybersecuritynews.com/tesla-data-leak-safety/?amp">Read More <span>>></span></a>
+                </div>
+                <img class="img-fluid" src="https://images.unsplash.com/photo-1483389127117-b6a2102724ae?...">
+            </article>
+
+            <article>
+                <h4>just in </h4>
+                <div>
+                    <h2>Stealthy Bandit Stealer Targeting Web Browsers and Cryptocurrency Wallets</h2>
+                    <p>Bandit Stealer can target numerous web browsers and cryptocurrency wallets.</p>
+                    <a href="https://thehackernews.com/2023/05/new-stealthy-bandit-stealer-targeting.html?m=1">Read More <span>>></span></a>
+                </div>
+                <img src="https://images.unsplash.com/photo-1524860769472-246b6afea403?...">
+            </article>
+
+            <article>
+                <h4>just in </h4>
+                <div>
+                    <h2>Bitdefender Launches App Android Mobile Devices</h2>
+                    <p>...Bitdefender unveiled App Anomaly Detection for Android Mobile Security...</p>
+                    <a href="https://www.bitdefender.com/news/...">Read More <span>>></span></a>
+                </div>
+                <img src="data:image/png;base64,...">
+            </article>
+
+            <article>
+                <h4>just in </h4>
+                <div>
+                    <h2>FBI: man steals $600k in sports betting website hack</h2>
+                    <p>An 18-year-old Wisconsin man charged with hacking a fantasy sports site.</p>
+                    <a href="https://cybernews.com/security/fbi-arrest-man-online-sports-betting-hack/">Read More <span>>></span></a>
+                </div>
+                <img src="https://images.unsplash.com/photo-1593672715438-d88a70629abe?...">
+            </article>
+
+            <article>
+                <h4>just in </h4>
+                <div>
+                    <h2>Neuralink gets FDA approval for study of brain implants in humans</h2>
+                    <p>Elon Musk's brain-implant company Neuralink gets green light for human trials.</p>
+                    <a href="https://cybernews.com/tech/neuralink-fda-approval-human-brain-implants/">Read More <span>>></span></a>
+                </div>
+                <img src="https://images1.mobilissimo.ro/F09/6470bf451e61d.png">
+            </article>
+        </section>
+    </main>
+</div>
+</body>
+</html>

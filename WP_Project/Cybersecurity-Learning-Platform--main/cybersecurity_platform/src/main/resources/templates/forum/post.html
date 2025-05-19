@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity"
+      layout:decorate="~{layout}">
+
+<head>
+    <title th:text="${post.title}">Forum Post</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <section class="container mt-4">
+        <h2 th:text="${post.title}">Post Title</h2>
+
+        <div th:if="${message}" class="alert alert-success" role="alert" th:text="${message}"></div>
+
+        <p th:text="${post.content}">Post content goes here.</p>
+
+        <small>
+            By
+            <span th:text="${post.author != null ? post.author.username : 'Unknown'}"></span>,
+            at
+            <span th:text="${post.createdAt != null ? #temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm') : 'Unknown date'}"></span>
+        </small>
+
+        <hr/>
+
+        <h4>Comments</h4>
+
+        <div th:if="${#lists.isEmpty(comments)}">
+            <p>No comments yet. Be the first to comment!</p>
+        </div>
+
+        <ul class="list-group mb-3" th:if="${!#lists.isEmpty(comments)}">
+            <li class="list-group-item d-flex justify-content-between align-items-start"
+                th:each="comment : ${comments}">
+                <div>
+                    <p th:text="${comment.content}">Comment content</p>
+                    <small>
+                        By
+                        <span th:text="${comment.author != null ? comment.author.username : 'Anonymous'}"></span>,
+                        at
+                        <span th:text="${comment.createdAt != null ? #temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm') : 'Unknown'}"></span>
+                    </small>
+                </div>
+
+                <!-- Show delete button if user is the author OR has ADMIN role -->
+                <form th:if="${#authentication.name == comment.author.username or #authorization.expression('hasRole(''ADMIN'')')}"
+                      th:action="@{|/forum/comment/${comment.id}/delete|}" method="post" style="margin-left: 1rem;">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </li>
+        </ul>
+
+        <!-- Comment form -->
+        <form th:action="@{|/forum/post/${post.id}/comment|}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <div class="mb-3">
+                <label for="commentContent" class="form-label">Add a comment:</label>
+                <textarea name="content" class="form-control" id="commentContent" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Post Comment</button>
+        </form>
+    </section>
+</div>
+</body>
+</html>

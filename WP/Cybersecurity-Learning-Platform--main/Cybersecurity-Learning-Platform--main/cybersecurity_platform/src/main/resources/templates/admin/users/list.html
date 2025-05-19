@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Manage Users</title>
+</head>
+<body>
+<div layout:fragment="content" class="container py-4">
+    <h2>Manage Users</h2>
+    <table class="table table-dark table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="u : ${users}">
+            <td th:text="${u.id}">1</td>
+            <td th:text="${u.username}">username</td>
+            <td th:text="${u.email}">email@example.com</td>
+            <td>
+                <ul style="list-style:none; padding:0; margin:0;">
+                    <li th:each="r : ${u.roles}" th:text="${r.name().replace('ROLE_','')}">ROLE</li>
+                </ul>
+            </td>
+            <td>
+                <a th:href="@{|/admin/users/${u.id}/edit|}" class="btn btn-sm btn-warning">Edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

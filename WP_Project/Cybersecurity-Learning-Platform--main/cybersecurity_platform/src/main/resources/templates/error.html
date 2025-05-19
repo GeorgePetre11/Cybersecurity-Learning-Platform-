@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Error</title>
+  <style>
+    body {
+        background-color: #1a1a1a;
+        color: white;
+        font-family: sans-serif;
+        text-align: center;
+        padding-top: 100px;
+    }
+    .error-box {
+        border: 1px solid #fff;
+        border-radius: 10px;
+        padding: 30px;
+        display: inline-block;
+    }
+  </style>
+</head>
+<body>
+<div class="error-box">
+  <h1>Oops!</h1>
+  <p>Something went wrong (404 Not Found).</p>
+  <a th:href="@{/}">Return to homepage</a>
+</div>
+</body>
+</html>

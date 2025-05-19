@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${news.id} != null ? 'Edit News #' + ${news.id} : 'Create News'"></title>
+</head>
+<body>
+<div layout:fragment="content" class="container py-4">
+    <h2 th:text="${news.id} != null ? 'Edit News #' + ${news.id} : 'Create News'"></h2>
+    <form th:action="${news.id} == null ? @{/admin/news/create} : @{/admin/news/{id}/edit(id=${news.id})}"
+          th:object="${news}" method="post">
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input class="form-control" th:field="*{title}" required/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Content</label>
+            <textarea class="form-control" th:field="*{content}" rows="6" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a th:href="@{/admin/news}" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+</body>
+</html>
