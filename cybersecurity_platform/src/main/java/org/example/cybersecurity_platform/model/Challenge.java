@@ -11,8 +11,10 @@ public class Challenge {
 
     private String title;
 
+    private Integer timeLimit;
+
     public Challenge() { }
-    public Challenge(Long id, String title) {
+    public Challenge(Long id, String title, Integer timeLimit) {
         this.id = id;
         this.title = title;
     }
@@ -22,4 +24,8 @@ public class Challenge {
 
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
+
+    public Integer getTimeLimit() { return timeLimit; }
+
+    public void setTimeLimit(Integer timeLimit) { this.timeLimit = timeLimit; }
 }

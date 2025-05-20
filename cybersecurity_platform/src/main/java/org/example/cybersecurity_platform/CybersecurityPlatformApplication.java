@@ -58,13 +58,13 @@ public class CybersecurityPlatformApplication {
         };
     }
 
-    // in CybersecurityPlatformApplication.java
 
     @Bean
     CommandLineRunner seedChallenges(ChallengeRepository repo) {
         return args -> {
             if (repo.count() == 0) {
-                repo.save(new Challenge(null, "Networking Beginner Challenge"));
+                repo.save(new Challenge(null, "Networking Beginner Challenge", 10));
+                repo.save(new Challenge(null, "Networking Advanced Challenge", 5));
             }
         };
     }

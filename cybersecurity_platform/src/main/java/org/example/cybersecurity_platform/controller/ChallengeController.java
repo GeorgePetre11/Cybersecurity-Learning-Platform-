@@ -26,10 +26,16 @@ public class ChallengeController {
 
     // src/main/java/org/example/cybersecurity_platform/controller/ChallengeController.java
     @GetMapping("/challenges/{id}/take")
-    public String take(@PathVariable Long id, Model model) {
+    public String take(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "normal") String mode,
+            Model model
+    ) {
+        // fetch the challenge (with its per-challenge timeLimit)
         Challenge chal = repo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("No such challenge"));
 
+        // define your ten questions
         List<Question> questions = List.of(
                 new Question(
                         "Which layer of the OSI model does the IP protocol operate?",
@@ -73,11 +79,23 @@ public class ChallengeController {
                 )
         );
 
-        model.addAttribute("challenge", chal);
-        model.addAttribute("questions", questions);
-        model.addAttribute("timeLimit", 1);  // minutes
+
+        int baseMinutes = Objects.requireNonNullElse(chal.getTimeLimit(), 5);
+
+
+        int dialedMinutes = "hard".equalsIgnoreCase(mode)
+                ? Math.max(1, baseMinutes / 2)
+                : baseMinutes;
+
+
+        model.addAttribute("challenge",  chal);
+        model.addAttribute("questions",  questions);
+        model.addAttribute("timeLimit",  dialedMinutes);
+        model.addAttribute("mode",       mode);
+
         return "challenges/take";
     }
+
 
 
     // 3.3 (optional) handle Finish
