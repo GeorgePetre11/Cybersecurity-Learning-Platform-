@@ -1,59 +1,44 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
-
 <head>
     <title>Register - CyberEdu</title>
-    <style>
-        .form-container {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 30px;
-            background-color: #1a1a1a;
-            border: 1px solid #fff;
-            border-radius: 10px;
-            color: #fff;
-        }
-
-        .form-container input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            border: none;
-            border-radius: 5px;
-        }
-
-        .form-container button {
-            background-color: #f70000;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .form-container button:hover {
-            background-color: #ff3a3a;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/global.css}" />
+    <link rel="stylesheet" th:href="@{/css/register.css}" />
 </head>
-
 <body>
 <div layout:fragment="content">
     <div class="form-container">
         <h2>Register</h2>
         <form th:action="@{/register}" method="post">
-            <label>Username</label>
-            <input type="text" name="username" required />
-            <label>Password</label>
-            <input type="password" name="password" required />
-            <label>Roles:</label>
-            <input type="checkbox" name="roles" value="ROLE_LEARNER"/> Learner
-            <input type="checkbox" name="roles" value="ROLE_BLOGGER"/> Blogger
-            <input type="checkbox" name="roles" value="ROLE_CHALLENGER"/> Challenger
-            <div th:if="${error}" th:text="${error}" style="color:red;"></div>
-            <button type="submit">Register</button>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" type="text" name="username" required />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" required />
+            </div>
+
+            <div class="form-group">
+                <label>Roles</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="roles" value="ROLE_LEARNER" /> Learner</label>
+                    <label><input type="checkbox" name="roles" value="ROLE_BLOGGER" /> Blogger</label>
+                    <label><input type="checkbox" name="roles" value="ROLE_CHALLENGER" /> Challenger</label>
+                </div>
+            </div>
+
+            <div th:if="${error}" class="form-group error">
+                <span th:text="${error}"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Register</button>
+            </div>
+
         </form>
     </div>
 </div>

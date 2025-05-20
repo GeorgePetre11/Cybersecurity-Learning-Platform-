@@ -1,0 +1,46 @@
+/* ─── Your site-wide styles ─────────────────────────────────────────── */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a;
+    color: #434343;
+}
+
+a {
+    color: #f70000;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+body {
+    background-color: #000000 !important;
+}
+
+
+.bg-white,
+.container,
+.section {
+    background-color: #000000 !important;
+}
+
+/* 3) Turn all “primary” buttons red */
+.btn-primary {
+    background-color: #e53935 !important;  /* main red */
+    border-color:    #e53935 !important;
+    color: #000000 !important;
+}
+
+/* 4) And give them a slightly darker hover state */
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #d32f2f !important;
+    border-color:    #d32f2f !important;
+}
+
+
+/* …anything else truly “global” (header, footer, utilities, etc.)… */

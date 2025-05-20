@@ -1,0 +1,69 @@
+/* src/main/resources/static/css/register.css */
+
+/* 1) Base container (you already had this) */
+.form-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #1a1a1a;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    color: #fff;
+}
+
+/* 2) Stack each form-row and space them out */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* 3) Make labels full-width and give them some breathing room */
+.form-group > label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* 4) Text inputs stay 100% wide */
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+/* 5) Checkbox group: stack vertically */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px; /* indent from the main label */
+}
+
+.checkbox-group label {
+    margin-bottom: 5px;
+    font-weight: normal;
+}
+
+.checkbox-group input {
+    margin-right: 8px;
+}
+
+/* 6) Style the submit button */
+.form-group button {
+    background-color: #f70000;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 7) Hover state */
+.form-group button:hover {
+    background-color: #ff3a3a;
+}
+
+/* 8) Error message */
+.error span {
+    color: #ff6666;
+}
